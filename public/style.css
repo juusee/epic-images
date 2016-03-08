@@ -1,0 +1,129 @@
+body {
+    font-family: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
+    color: #282828;
+}
+
+h1 {
+    font-weight: 300;
+}
+
+.navbar {
+    border-radius: 0;
+}
+
+.frontpage .row {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.user-images .row + .row {
+    margin-top: 30px;
+}
+
+.user-images button {
+    margin-top: 5px;
+}
+
+.image-list img {
+    -webkit-transition-duration: 0.1s; /* Safari */
+    transition-duration: 0.1s;
+    opacity: 1;
+    border: 2px solid #333333;
+}
+
+.image-list img:hover {
+    -webkit-transition-duration: 0.1s; /* Safari */
+    transition-duration: 0.1s;
+    opacity: 0.8;
+}
+
+.image-container {
+    border-top: 1px solid #bbb;
+    border-right: 1px solid #bbb;
+    border-left: 1px solid #bbb;
+    text-align: center;
+}
+
+.image-container img{
+    width: 100%;
+    height: auto;
+}
+
+.image-info {
+    margin-top:70px;
+}
+
+.comment-container {
+    border: 1px solid blue;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.comment-area {
+    width: 100%;
+    border:1px solid #bbb;
+    padding-top:20px;
+}
+.comment-area-title label {
+    background-color:#fdfdfd;
+    padding:10px;
+}
+.comment-area-title{
+    color:#444;
+    margin:0;
+    display:inline-block;
+}
+
+.image .form-group:first-child, .image .actionBox .form-group:first-child {
+    width:80%;
+}
+.image .form-group:nth-child(2), .image .actionBox .form-group:nth-child(2) {
+    width:18%;
+}
+.image .actionBox .form-group * {
+    width:100%;
+}
+.commentList {
+    padding:0;
+    list-style:none;
+    max-height:500px;
+    overflow:auto;
+    margin-top: 20px;
+}
+.commentList li {
+    margin:0;
+    margin-top:10px;
+}
+.commentList li > div {
+    display:table-cell;
+}
+.commenterImage {
+    width:30px;
+    margin-right:5px;
+    height:100%;
+    float:left;
+}
+.commenterImage img {
+    width:100%;
+    border-radius:50%;
+}
+
+.commenter {
+    font-weight: bold;
+}
+
+.commentText p {
+    margin:0;
+}
+.sub-text {
+    color:#aaa;
+    font-family:verdana;
+    font-size:11px;
+}
+.actionBox {
+    padding:10px;
+}
