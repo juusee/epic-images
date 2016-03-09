@@ -5,6 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!-- Easy way to know login status from script -->
+    <meta name="login-status" content="{{ Auth::check() }}">
+
+    <!-- For ajax calls -->
+    <meta name="_token" content="{!! csrf_token() !!}"/>
+
     <title>@yield('title')</title>
 
     <!-- Fonts -->
@@ -69,11 +75,25 @@
 
 @yield('content')
 
-        <!-- JavaScripts -->
+
+<!-- JavaScripts -->
 <script src="{{url('/bower_resources/jquery/dist/jquery.min.js')}}"></script>
 <script src="{{url('/bower_resources/jquery-validation/dist/jquery.validate.min.js')}}"></script>
-<script src="{{url('/js/input-validation.js')}}"></script>
+<script src="{{url('/bower_resources/jquery-ui/jquery-ui.min.js')}}"></script>
+
+<script type="text/javascript">
+    $.ajaxSetup({
+        headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+    });
+</script>
+
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
+
+<script src="{{url('/js/input-validation.js')}}"></script>
+<script src="{{url('/js/check-remove.js')}}"></script>
+
+@yield('end')
+
 </body>
 </html>

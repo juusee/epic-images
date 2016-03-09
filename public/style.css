@@ -63,7 +63,7 @@ h1 {
     font-weight: bold;
 }
 
-.comment-area {
+#comment-area {
     width: 100%;
     border:1px solid #bbb;
     padding-top:20px;
@@ -78,13 +78,13 @@ h1 {
     display:inline-block;
 }
 
-.image .form-group:first-child, .image .actionBox .form-group:first-child {
+#comment-area .form-group:first-child, #comment-area .commentBox .form-group:first-child {
     width:80%;
 }
-.image .form-group:nth-child(2), .image .actionBox .form-group:nth-child(2) {
+#comment-area .form-group:nth-child(2), #comment-area .commentBox .form-group:nth-child(2) {
     width:18%;
 }
-.image .actionBox .form-group * {
+#comment-area .commentBox .form-group * {
     width:100%;
 }
 .commentList {
@@ -124,7 +124,7 @@ h1 {
     font-family:verdana;
     font-size:11px;
 }
-.actionBox {
+.commentBox {
     padding:10px;
 }
 

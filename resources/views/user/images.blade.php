@@ -26,7 +26,7 @@
                             <div class="image-list">
                                 <a href="{{url('image/' . $image->id)}}"><img width="200" height="200" src="{{url('images/' . $image->id . '.' . $image->extension)}}" alt=""></a>
                                 @if(Auth::user()->id === $user->id)
-                                    <form action="{{url('image/' . $image->id)}}" method="POST">
+                                    <form class="form-remove" action="{{url('image/' . $image->id)}}" method="POST">
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
                                         <button type="submit" id="delete-image-{{$image->id}}" class="btn btn-danger btn-sm">

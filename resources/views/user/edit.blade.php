@@ -30,7 +30,7 @@
 
                 <p>Or</p>
 
-                <form class="form-horizontal" role="form" action="{{url('user/' . $user->id)}}" method="POST">
+                <form class="form-remove form-horizontal" role="form" action="{{url('user/' . $user->id)}}" method="POST">
                     {{ csrf_field() }}
                     {{ method_field('DELETE') }}
                     <div class="form-group">

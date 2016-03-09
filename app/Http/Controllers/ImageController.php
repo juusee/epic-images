@@ -46,7 +46,7 @@ class ImageController extends Controller
         return view('image.show', [
             'user' => $this->users->getUserById($image->user_id),
             'image' => $image,
-            'comments' => $this->comments->getImageComments($image->id),
+            //'comments' => $this->comments->getImageComments($image->id),
         ]);
     }
 
@@ -77,7 +77,7 @@ class ImageController extends Controller
             $upload_success = $file->move($destinationPath, $fileName);
 
             if ($upload_success) {
-                return redirect('user/' . $request->user()->username . '/imageupload')->with('message', 'Image uploaded successfully');
+                return redirect('image/' . $image->id);
             } else {
                 return redirect('user/' . $request->user()->username . '/imageupload')->with('message', 'Something wrong with image upload');
             }

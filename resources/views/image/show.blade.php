@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <div class="image container">
+    <div class="container">
         <div class="row">
             <div class="col-md-2">
                 <div class="image-info">
@@ -23,38 +23,20 @@
         </div>
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <div class="comment-area">
-                    <div class="comment-area-title">
-                        <label>Comments</label>
-                    </div>
-                    <div class="actionBox">
-                        @if (Auth::guest())
-                            <p>You have to login or register to comment</p>
-                        @else
-                            <form id="commentForm" class="form-inline" role="form" method="POST" action="{{url('image/' . $image->id . '/comment')}}">
-                                <div class="form-group">
-                                    <textarea form="commentForm" class="form-control" name="comment" placeholder="Add comment!"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-default">Add</button>
-                                </div>
-                                {!! csrf_field() !!}
-                            </form>
-                        @endif
-                        <ul class="commentList">
-                            @foreach($comments as $comment)
-                                <li>
-                                    <div class="commentText">
-                                        <a class="commenter" href="{{url('/user/' . $comment->user)}}">{{$comment->user}}:</a>
-                                        <p class="">{{$comment->content}}</p> <span class="date sub-text">{{$comment->created_at}}</span>
-                                    </div>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
+                <div id="comment-area">
+
                 </div>
             </div>
         </div>
     </div>
+
+@endsection
+
+@section('end')
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+<script type="text/babel" src="{{url('js/comments.js')}}"></script>
 
 @endsection

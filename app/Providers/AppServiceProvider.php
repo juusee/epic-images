@@ -26,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('ImageService', function () {
+        /*$this->app->singleton('ImageService', function () {
             return new ImageService();
         });
 
@@ -36,6 +36,6 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->singleton('CommentService', function() {
            return new CommentService();
-        });
+        });*/
     }
 }
