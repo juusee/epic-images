@@ -13,4 +13,8 @@ class UserRepository
     public function getUserById($id) {
         return User::where('id', $id)->first();
     }
+
+    public function destroy($id) {
+        User::destroy($id);
+    }
 }

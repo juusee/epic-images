@@ -45,7 +45,7 @@
                             @foreach($comments as $comment)
                                 <li>
                                     <div class="commentText">
-                                        <p class="commenter">{{$comment->user}}:</p>
+                                        <a class="commenter" href="{{url('/user/' . $comment->user)}}">{{$comment->user}}:</a>
                                         <p class="">{{$comment->content}}</p> <span class="date sub-text">{{$comment->created_at}}</span>
                                     </div>
                                 </li>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Domain\Services\ImageService;
 use App\Image;
 use App\Repositories\CommentRepository;
 use App\Repositories\ImageRepository;
@@ -16,11 +17,13 @@ use Illuminate\Support\Facades\Input;
 class ImageController extends Controller
 {
 
+    protected $imageService;
     protected $images;
     protected $users;
     protected $comments;
 
-    public function __construct(ImageRepository $images, UserRepository $users, CommentRepository $comments) {
+    public function __construct(ImageService $imageService, ImageRepository $images, UserRepository $users, CommentRepository $comments) {
+        $this->imageService = $imageService;
         $this->images = $images;
         $this->users = $users;
         $this->comments = $comments;
@@ -30,11 +33,11 @@ class ImageController extends Controller
 
     }
 
-    public function userImages(Request $request, $username) {
+    public function userImages($username) {
         $user = $this->users->getUserByName($username);
         return view('user.images', [
             'user' => $user,
-            'images' => $this->images->getUserImages($user),
+            'images' => $this->images->getUserImages($user->id),
         ]);
     }
 
@@ -43,7 +46,7 @@ class ImageController extends Controller
         return view('image.show', [
             'user' => $this->users->getUserById($image->user_id),
             'image' => $image,
-            'comments' => $this->comments->getImageComments($image),
+            'comments' => $this->comments->getImageComments($image->id),
         ]);
     }
 
@@ -85,9 +88,7 @@ class ImageController extends Controller
     public function destroy(Request $request, Image $image) {
         $this->authorize('destroy', $image);
 
-        unlink('images/' . $image->id . '.' . $image->extension);
-
-        $image->delete();
+        $this->imageService->removeImage($image);
 
         return redirect('user/' . $request->user()->username . '/images');
     }

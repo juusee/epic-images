@@ -1,0 +1,23 @@
+{
+  "name": "harkkatyo",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Jussi Rinta-Jaskari <jussi.rintajaskari@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/juusee/epic-images",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/bower_resources",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.1"
+  }
+}

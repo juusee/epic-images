@@ -2,32 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use App\Domain\Services\ImageService;
+use App\Domain\Services\UserService;
 use App\User;
-use App\Repositories\ImageRepository;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Repositories\UserRepository;
 
 class UserController extends Controller
 {
-    protected $users;
-    protected $images;
+    protected $userService;
+    protected $imageService;
 
-    public function __construct(UserRepository $users, ImageRepository $images) {
+    public function __construct(UserService $userService, ImageService $imageService) {
         $this->middleware('auth');
-        $this->users = $users;
-        $this->images = $images;
+        $this->userService = $userService;
+        $this->imageService = $imageService;
     }
 
     public function index() {
         return view('user.index');
     }
 
-    public function show(Request $request, $username) {
+    public function show($username) {
         return view('user.index', [
-            'user' => $this->users->getUserByName($username),
+            'user' => $this->userService->getUserByName($username),
         ]);
     }
 
@@ -45,17 +45,10 @@ class UserController extends Controller
         return redirect('user/' . $request->user()->username . '/edit');
     }
 
-    public function destroy(Request $request, User $user) {
+    public function destroy(User $user) {
         $this->authorize('destroy', $user);
 
-        $images = $this->images->getUserImages($user);
-
-        foreach ($images as $image) {
-            unlink('images/' . $image->id . '.' . $image->extension);
-            $image->delete();
-        }
-
-        $user->delete();
+        $this->userService->removeUser($user);
 
         return redirect('/');
     }

@@ -127,3 +127,7 @@ h1 {
 .actionBox {
     padding:10px;
 }
+
+.error-darkred {
+    color: darkred;
+}
