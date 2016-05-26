@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Domain\Services\ImageService;
 use App\Domain\Services\UserService;
+use App\Repositories\ImageRepository;
+use App\Repositories\UserRepository;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -12,13 +14,13 @@ use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
-    protected $userService;
-    protected $imageService;
+    protected $users;
+    protected $images;
 
-    public function __construct(UserService $userService, ImageService $imageService) {
+    public function __construct(UserRepository $userRepository, ImageRepository $imageRepository) {
         $this->middleware('auth');
-        $this->userService = $userService;
-        $this->imageService = $imageService;
+        $this->users = $userRepository;
+        $this->images = $imageRepository;
     }
 
     public function index() {
@@ -27,7 +29,7 @@ class UserController extends Controller
 
     public function show($username) {
         return view('user.index', [
-            'user' => $this->userService->getUserByName($username),
+            'user' => $this->users->getUserByName($username)
         ]);
     }
 
@@ -37,18 +39,23 @@ class UserController extends Controller
         ]);
     }
 
-    public function update(Request $request) {
-        $user = $request->user();
-        $user->username = $request->input('username');
-        $user->email= $request->input('email');
-        $user->save();
-        return redirect('user/' . $request->user()->username . '/edit');
+    public function update(Request $request, User $users) {
+        if (!($request->user()->allowed('edit.users', $users, true, 'id'))) {
+            return response('Unauthorized.', 401);
+        }
+
+        $users->username = $request->input('username');
+        $users->email = $request->input('email');
+        $users->save();
+        return redirect('/users/' . $users->username);
     }
 
-    public function destroy(User $user) {
-        $this->authorize('destroy', $user);
+    public function destroy(Request $request, User $users) {
+        if (!($request->user()->allowed('delete.users', $users, true, 'id'))) {
+            return response('Unauthorized.', 401);
+        }
 
-        $this->userService->removeUser($user);
+        $this->users->destroy($users->id);
 
         return redirect('/');
     }

@@ -6,7 +6,7 @@
 
     <div class="container">
         <div class="row col-md-4 col-md-offset-4">
-            <form class="form-horizontal" role="form" method="POST" action="{{url('image')}}" enctype="multipart/form-data">
+            <form class="form-horizontal" role="form" method="POST" action="{{url('images')}}" enctype="multipart/form-data">
                 {!! csrf_field() !!}
                 <div class="form-group">
                     <label class="control-label" for="image">File input</label>
@@ -21,7 +21,7 @@
                         Upload
                     </button>
                 </div>
-                <div class="alert ">
+                <div class="alert">
                     {{ session('message') }}
                 </div>
             </form>

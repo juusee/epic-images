@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Easy way to know login status from script -->
-    <meta name="login-status" content="{{ Auth::check() }}">
+    <!-- Easy way to know login status from script
+    <meta name="login-status" content="{{ Auth::check() }}"> -->
 
     <!-- For ajax calls -->
     <meta name="_token" content="{!! csrf_token() !!}"/>
@@ -21,6 +21,22 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
     <link rel="stylesheet" href="{{url('/style.css')}}">
+
+    <!-- JavaScripts -->
+    <script src="{{url('/bower_resources/jquery/dist/jquery.min.js')}}"></script>
+    <script src="{{url('/bower_resources/jquery-validation/dist/jquery.validate.min.js')}}"></script>
+    <script src="{{url('/bower_resources/jquery-ui/jquery-ui.min.js')}}"></script>
+
+    <script type="text/javascript">
+        $.ajaxSetup({
+            headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+        });
+    </script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
+
+    @yield('head-scripts')
 
 </head>
 <body id="app-layout">
@@ -44,11 +60,6 @@
         </div>
 
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
-            <!-- Left Side Of Navbar -->
-            <!--<ul class="nav navbar-nav">
-                <li><a href="">Last added</a></li>
-            </ul>-->
-
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->
@@ -61,9 +72,8 @@
                             {{ Auth::user()->username }} <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{ url('/user/' . Auth::user()->username)}}">Profile</a></li>
-                            <li><a href="{{ url('/user/' . Auth::user()->username . '/edit') }}">Edit profile</a></li>
-                            <li><a href="{{ url('/user/' . Auth::user()->username . '/imageupload') }}">Upload image</a></li>
+                            <li><a href="{{ url('/users/' . Auth::user()->username)}}">Profile</a></li>
+                            <li><a href="{{ url('/users/' . Auth::user()->username . '/imageupload') }}">Upload image</a></li>
                             <li><a href="{{ url('/logout') }}">Logout</a></li>
                         </ul>
                     </li>
@@ -74,21 +84,6 @@
 </nav>
 
 @yield('content')
-
-
-<!-- JavaScripts -->
-<script src="{{url('/bower_resources/jquery/dist/jquery.min.js')}}"></script>
-<script src="{{url('/bower_resources/jquery-validation/dist/jquery.validate.min.js')}}"></script>
-<script src="{{url('/bower_resources/jquery-ui/jquery-ui.min.js')}}"></script>
-
-<script type="text/javascript">
-    $.ajaxSetup({
-        headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
-    });
-</script>
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-{{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 
 <script src="{{url('/js/input-validation.js')}}"></script>
 <script src="{{url('/js/check-remove.js')}}"></script>

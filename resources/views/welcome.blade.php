@@ -13,7 +13,7 @@
         @endif
             <div class="col-md-3">
                 <div class="image-list">
-                    <a href="{{url('image/' . $image->id)}}"><img width="240" height="240" src="{{url('images/' . $image->id . '.' . $image->extension)}}" alt="{{$image->description}}"></a>
+                    <a href="{{url('images/' . $image->id)}}"><img width="240" height="240" src="{{url('imgs/' . $image->id . '.' . $image->extension)}}" alt="{{$image->description}}"></a>
                 </div>
             </div>
         <?php $i++; ?>

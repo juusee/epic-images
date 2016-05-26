@@ -1,6 +1,14 @@
 $(document).ready(function () {
 
+    $('#commentForm').validate({
+        rules: {
+            content: {
+                required: true
+            }
+        },
 
+        errorClass: 'error-darkred'
+    });
 
     $('#loginForm').validate({
         rules: {
@@ -14,7 +22,7 @@ $(document).ready(function () {
             }
         },
 
-        errorClass: 'error-red'
+        errorClass: 'error-darkred'
 
     });
 
@@ -43,6 +51,22 @@ $(document).ready(function () {
        },
 
        errorClass: 'error-darkred'
+    });
+
+    $('#updateForm').validate({
+        rules: {
+            username: {
+                required: true,
+                minlength: 2
+            },
+
+            email: {
+                required: true,
+                email: true
+            }
+        },
+
+        errorClass: 'error-darkred'
     });
 
 });

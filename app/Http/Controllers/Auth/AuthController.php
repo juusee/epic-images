@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use DCN\RBAC\Models\Role;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+
+use App\Rbac\Rbac;
 
 class AuthController extends Controller
 {
@@ -38,7 +41,7 @@ class AuthController extends Controller
     public function __construct()
     {
         $this->middleware('guest', ['except' => 'logout']);
-    }
+    }   
 
     /**
      * Get a validator for an incoming registration request.
@@ -63,10 +66,13 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+        $userRole = Rbac::getUserRole();
+        $user->attachRole($userRole);
+        return $user;
     }
 }

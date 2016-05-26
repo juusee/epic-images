@@ -24,15 +24,14 @@
 
 Route::group(['middleware' => ['web']], function () {
 
-    Route::get('/', 'HomeController@index');
-    Route::resource('user', 'UserController');
-    Route::get('user/{user}/images', 'ImageController@userImages');
-    Route::resource('image', 'ImageController');
-    Route::get('user/{user}/imageupload', function() {
+    Route::get('/', 'ImageController@index');
+    Route::resource('users', 'UserController');
+    Route::get('users/{user}/images', 'ImageController@userImages');
+    Route::resource('images', 'ImageController');
+    Route::get('users/{user}/imageupload', function() {
         return view('user.imageupload');
     });
-    Route::resource('image.comment', 'CommentController');
+    Route::resource('images.comments', 'CommentController');
 
     Route::auth();
-
 });
